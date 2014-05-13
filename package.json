@@ -1,0 +1,19 @@
+{
+  "name": "drafty",
+  "version": "1.0.0",
+  "description": "Feel the base 10, feel the algorithm.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Roger Steve Ruiz <hi@rog.gr>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "~4.1.2",
+    "hbs": "~2.6.0",
+    "hbs-utils": "0.0.2",
+    "marked": "~0.3.2",
+    "highlight.js": "~8.0.0",
+    "consolidate": "~0.10.0"
+  }
+}
