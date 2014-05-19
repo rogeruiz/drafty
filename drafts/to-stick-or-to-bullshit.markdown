@@ -1,4 +1,4 @@
-To stick or to bullshit
+To Stick Or To Bullshit
 ===
 
 Sticky elements are easier on native devices, and they need to be faked in a
@@ -19,33 +19,18 @@ $titles.each(function (i, el) {
   $container = $el.parents('.js-scroll');
   scrollY = $container.scrollTop();
   containerHeight = $container.height();
-  titlePosition = (titleY - scrollY);
+  titlePosition = (scrollY > -1) ? (titleY - scrollY) : titleY;
   isVisible = (titlePosition < (containerHeight + scrollY));
 });
 
 ```
 
-###### Allowing titles to stick to top
+###### Affixing titles to the scroll y position
 ```js
-// withinLoop
-if (i === 0) {
-  $title.css({
-    position: 'fixed',
-    top: titleY - scrollY,
-    zIndex: currentZIndex
-  });
-}
-```
-
-###### Allowing titles to move with the scroll position
-```js
-// withinLoop
-if ($title.offset().top > $('.js-scroll').scrollTop()) {
-  $title.css({
-    position: 'fixed',
-    top: (),
-    left: 0,
-    zIndex: currentZIndex++
-  });
-}
+$title.css({
+  position: 'fixed',
+  top: titlePosition,
+  left: 0,
+  zIndex: currentZIndex++
+});
 ```
