@@ -18,7 +18,6 @@ var app = module.exports = express();
 app.use('/public', express.static(__dirname + '/public'));
 
 app.set('view engine', 'hbs');
-app.set('views', __dirname + '/views');
 
 hbs.registerHelper('list', function (context, options) {
   var list = '<ul>';
@@ -55,12 +54,22 @@ app.get('/', function (req, res) {
   res.render('partials/index');
 });
 
+app.get('/drafts', function (req, res) {
+  res.redirect('/');
+});
+
 app.get('/drafts/:title', function (req, res) {
   var title = req.params.title;
   var path = __dirname + '/drafts/' + title + '.markdown';
   var draft = humanizeDraft(title);
   fs.readFile(path, 'utf8', function (err, str) {
-    if (!err) {
+    if (err) {
+      res.locals = {
+        pageTitle: '"' + draft.title + '" Not Found',
+        title: draft.title
+      };
+      res.render('partials/404');
+    } else {
       res.locals = {
         pageTitle: draft.title + ' : Drafty',
         draft: marked(str)
