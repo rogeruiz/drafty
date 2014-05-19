@@ -79,6 +79,15 @@ app.get('/drafts/:title', function (req, res) {
   });
 });
 
+app.get('*', function (req, res) {
+  console.log(req);
+  res.locals = {
+    pageTitle: '404 Error',
+    title: req.url.substr(1)
+  };
+  res.render('partials/404');
+});
+
 if (!module.parent) {
   app.listen('1337');
   console.log('Express started on port %d', 1337);
